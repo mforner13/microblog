@@ -1,3 +1,3 @@
 # microblog
 
-A microblog using FLask
+A microblog using Flask
