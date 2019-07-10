@@ -22,4 +22,23 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
+class Masterclass(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150))
+    description = db.Column(db.String(400))
+    timestamp = db.Column(db.DateTime, index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    location = db.relationship('Location', backref='location', lazy='dynamic')
+
+class Location(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    building = db.Column(db.String(50), index=True)
+    street_number = db.Column(db.String(5)) #should keep numbers as strings unless going to do calculations?
+    street_name = db.Column(db.String(100), index=True)
+    town_or_city = db.Column(db.String(50), index=True)
+    postcode = db.Column(db.String(9), index=True)
+    masterclass_id = db.Column(db.Integer, db.ForeignKey('masterclass.id'))
+
+
+
 
